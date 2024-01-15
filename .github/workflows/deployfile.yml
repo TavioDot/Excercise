@@ -1,0 +1,49 @@
+name: Deploy e testes
+on: [push]
+jobs:
+    lintar:
+        runs-on: ububtu-latest
+        steps:
+            - name: pegar codigo
+              uses: actions/checkout@v3
+            - name: Instalar Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+            - name: Instalar dependencias
+              run: npm ci
+            - name: Rodar Lint
+              run: npm run lint
+    testar:
+        needs: lintar
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pegar codigo
+              uses: actions/checkout@v3
+            - name: Instalar NodeJS
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - name: Instalar dependencias
+              run: npm ci
+            - name: Rodar testes
+              run: npm test
+    deploy:
+        needs: [lintar, testar]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pegar codigo
+              uses: actions/checkout@v3
+            - name: Instalar NodeJS
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+            - name: Instalar dependencias
+              run: npm ci
+            - name: Construir projeto
+              run: npm run build
+            - name: Deploy
+              run: echo 'Deployng ...'
+
+
+            
