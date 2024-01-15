@@ -2,7 +2,7 @@ name: Deploy e testes
 on: [push]
 jobs:
     lintar:
-        runs-on: ububtu-latest
+        runs-on: ubuntu-latest
         steps:
             - name: pegar codigo
               uses: actions/checkout@v3
