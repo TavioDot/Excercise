@@ -7,3 +7,4 @@ jobs:
             - name: Detalhes do evento
               run: echo "${{toJSON(github.event)}}"
               
+#Issue é como se fosse um comentario ou uma sugestao no repositorio do código!
